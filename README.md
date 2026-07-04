@@ -64,7 +64,7 @@ Please use this runbook to walk me through organizing my agent workspace. Start 
 6. Open `prompts/02-create-directory-atlas.md`, copy the text inside the code block, and paste it into your agent chat.
 7. Open `prompts/03-add-agent-placement-rules.md`, copy the text inside the code block, and paste it into your agent chat.
 8. Open `prompts/04-review-memory-bloat.md`, copy the text inside the code block, and paste it into your agent chat.
-9. Use `prompts/05-before-you-create-a-folder.md` whenever the agent wants to create a new durable folder.
+9. When the agent wants to create a new durable folder, open `prompts/05-before-you-create-a-folder.md`, copy the text inside the code block, and paste it into your agent chat.
 
 If your agent can run commands, ask it to validate the package or starter workspace:
 
