@@ -25,11 +25,7 @@ Please walk me through building an organization system for this workspace. Use t
 
 ## Step 1: Inspect The Workspace
 
-Use:
-
-```text
-prompts/01-map-my-current-folders.md
-```
+Open `prompts/01-map-my-current-folders.md`, copy the text inside its code block, and paste that text into your agent.
 
 The agent should identify major folders, protected areas, unclear folders, and likely homes for projects, reports, research, reference material, memory, logs, and templates.
 
@@ -37,11 +33,7 @@ Do not ask the agent to deeply read private contents. Folder names and existing 
 
 ## Step 2: Create DIRECTORY_ATLAS.md
 
-Use:
-
-```text
-prompts/02-create-directory-atlas.md
-```
+Open `prompts/02-create-directory-atlas.md`, copy the text inside its code block, and paste that text into your agent.
 
 The atlas should be short and useful. It should explain where durable files belong. It should not list every file on the system.
 
@@ -54,11 +46,7 @@ Good atlas entries answer:
 
 ## Step 3: Add AGENTS.md Placement Rules
 
-Use:
-
-```text
-prompts/03-add-agent-placement-rules.md
-```
+Open `prompts/03-add-agent-placement-rules.md`, copy the text inside its code block, and paste that text into your agent.
 
 The agent should preserve existing instructions and add a focused placement section.
 
@@ -70,11 +58,7 @@ Before creating durable files or folders, consult DIRECTORY_ATLAS.md and search 
 
 ## Step 4: Set Memory Rules
 
-Use:
-
-```text
-prompts/04-review-memory-bloat.md
-```
+Open `prompts/04-review-memory-bloat.md`, copy the text inside its code block, and paste that text into your agent.
 
 The goal is to decide what belongs in long-term memory, daily notes, project files, reports, or nowhere.
 
@@ -82,11 +66,7 @@ Long-term memory should hold durable rules and important context. It should not 
 
 ## Step 5: Use The Folder-Creation Gate
 
-Use this prompt whenever the agent wants to create a new durable folder:
-
-```text
-prompts/05-before-you-create-a-folder.md
-```
+When the agent wants to create a new durable folder, open `prompts/05-before-you-create-a-folder.md`, copy the text inside its code block, and paste that text into your agent.
 
 This step prevents folder sprawl. The agent must explain what it checked and why a new folder is needed.
 

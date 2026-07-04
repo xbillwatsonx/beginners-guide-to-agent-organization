@@ -44,20 +44,27 @@ This runbook fixes that by creating three simple anchors:
 - `CHANGELOG.md` - package history.
 - `LICENSE` - MIT License.
 
-Use `starter-kit/` if you want ready-to-go files you can copy into your workspace as-is.
+### Starter Kit vs Templates
 
-Use `templates/` if you want to customize the wording before installing the files.
+- `starter-kit/` contains copy-ready working starter files you can place into your workspace as-is.
+- `templates/` contains files to customize before installing.
 
 ## Quick Start
 
 1. Open `runbook/quick-start-card.md`.
 2. Each prompt file contains a code block. Copy the text inside the code block and paste it into your agent chat.
-3. Open `prompts/01-map-my-current-folders.md`, copy the text inside the code block, and paste it into your agent chat.
-4. Let the agent inspect the workspace and explain what it found.
-5. Open `prompts/02-create-directory-atlas.md`, copy the text inside the code block, and paste it into your agent chat.
-6. Open `prompts/03-add-agent-placement-rules.md`, copy the text inside the code block, and paste it into your agent chat.
-7. Open `prompts/04-review-memory-bloat.md`, copy the text inside the code block, and paste it into your agent chat.
-8. Use `prompts/05-before-you-create-a-folder.md` whenever the agent wants to create a new durable folder.
+3. Start with this message:
+
+```text
+Please use this runbook to walk me through organizing my agent workspace. Start with the quick-start card, use the prompts in order, and do not create or delete anything until you have inspected the existing folder structure and explained your plan.
+```
+
+4. Open `prompts/01-map-my-current-folders.md`, copy the text inside the code block, and paste it into your agent chat.
+5. Let the agent inspect the workspace and explain what it found.
+6. Open `prompts/02-create-directory-atlas.md`, copy the text inside the code block, and paste it into your agent chat.
+7. Open `prompts/03-add-agent-placement-rules.md`, copy the text inside the code block, and paste it into your agent chat.
+8. Open `prompts/04-review-memory-bloat.md`, copy the text inside the code block, and paste it into your agent chat.
+9. Use `prompts/05-before-you-create-a-folder.md` whenever the agent wants to create a new durable folder.
 
 If your agent can run commands, ask it to validate the package or starter workspace:
 

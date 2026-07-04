@@ -21,7 +21,7 @@ validate:
 package:
     mkdir -p downloads
     rm -f downloads/beginners-guide-to-agent-organization-v*.zip
-    zip -r downloads/beginners-guide-to-agent-organization-v0.1.0.zip . -x './.git/*' './downloads/*' './__pycache__/*' './IMPLEMENTATION_PLAN.md' './REVIEW-INSTRUCTIONS.md'
+    zip -r downloads/beginners-guide-to-agent-organization-v0.1.0.zip . -x './.git/*' './downloads/*' './__pycache__/*' './IMPLEMENTATION_PLAN.md' './REVIEW-INSTRUCTIONS.md' './.codex/*' './.codex/**' './.agents/*' './.agents/**'
 
 # Quick context check for agents before editing.
 agent-preflight:

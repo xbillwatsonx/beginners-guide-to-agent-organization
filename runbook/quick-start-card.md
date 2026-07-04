@@ -14,14 +14,12 @@ Your agent will help you make three simple things:
 
 Give these prompts to your agent in order so it can walk you through setup:
 
-1. `prompts/01-map-my-current-folders.md`
-2. `prompts/02-create-directory-atlas.md`
-3. `prompts/03-add-agent-placement-rules.md`
-4. `prompts/04-review-memory-bloat.md`
+1. Open `prompts/01-map-my-current-folders.md`, copy only the text inside the code block, and paste that into your agent chat.
+2. Open `prompts/02-create-directory-atlas.md`, copy only the text inside the code block, and paste that into your agent chat.
+3. Open `prompts/03-add-agent-placement-rules.md`, copy only the text inside the code block, and paste that into your agent chat.
+4. Open `prompts/04-review-memory-bloat.md`, copy only the text inside the code block, and paste that into your agent chat.
 
-Use this prompt any time the agent wants to create a new durable folder:
-
-- `prompts/05-before-you-create-a-folder.md`
+Any time the agent wants to create a new durable folder, open `prompts/05-before-you-create-a-folder.md`, copy only the text inside the code block, and paste that into your agent chat.
 
 ## Simple Rule
 

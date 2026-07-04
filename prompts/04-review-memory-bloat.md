@@ -22,8 +22,7 @@ Please return:
 5. What belongs in daily notes.
 6. What belongs in project docs instead of memory.
 7. What should not be remembered at all.
-8. A short proposed MEMORY rules section I can add to AGENTS.md or a memory guide.
+8. A short proposed memory-rules section I can add to AGENTS.md, MEMORY-rules.md, or another memory guide.
 
 Do not make edits until you show me the proposal.
 ```
-

@@ -13,7 +13,7 @@ Rules:
 - Preserve existing instructions.
 - Add a focused section for directory placement and organization.
 - Make the rules practical, not theoretical.
-- If AGENTS.md does not exist, propose creating one and show me the contents first.
+- If AGENTS.md does not exist, propose creating one at the workspace root, show me the full contents first, and ask for approval before writing it.
 
 The section should say:
 1. Consult DIRECTORY_ATLAS.md before saving, creating, moving, or organizing durable files.
@@ -30,4 +30,3 @@ After editing, report:
 - any existing rules you preserved
 - anything you were unsure about
 ```
-
