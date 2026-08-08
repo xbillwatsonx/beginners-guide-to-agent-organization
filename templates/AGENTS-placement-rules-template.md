@@ -16,3 +16,13 @@ If something matters beyond the current chat, write it to the right file instead
 
 When a new durable folder is approved, update `DIRECTORY_ATLAS.md` if future agents will need to know about it.
 
+## Path Resolution Preflight
+
+Before creating, moving, copying, or consolidating durable files or folders:
+
+1. Run `python3 path-resolution-preflight.py '<requested-path>'`.
+2. Review the requested path, expanded absolute path, immediate parent, nearest governing `AGENTS.md`, established atlas roots, duplicated segments, unresolved variables, and symlinks.
+3. Treat a `SUSPICIOUS` result or exit status `2` as a stop condition. Ask the user to confirm the exact absolute destination before acting.
+4. After the change, run `python3 path-resolution-preflight.py --verify-existing '<absolute-destination>'` and report the verified absolute destination.
+
+Quote the requested path so the shell does not expand it before the helper can inspect it.

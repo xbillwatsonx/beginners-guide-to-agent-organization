@@ -9,6 +9,7 @@ Your agent will help you make three simple things:
 1. `DIRECTORY_ATLAS.md` - a map of where files belong.
 2. `AGENTS.md` placement rules - instructions your agent must follow.
 3. memory rules - guidance for what should be remembered, filed, summarized, or ignored.
+4. Path Resolution Preflight - a read-only check of the exact destination before durable filesystem changes.
 
 ## Copy-Paste Workflow
 
@@ -27,6 +28,14 @@ Your agent should search before it creates.
 
 If the right home already exists, use it. If several homes could fit, explain the options. If the agent is still unsure, it should ask before creating a new durable folder.
 
+Before creating, moving, copying, or consolidating durable files, run:
+
+```bash
+python3 path-resolution-preflight.py '<requested-path>'
+```
+
+Keep the path quoted. Stop for confirmation if the result says `SUSPICIOUS`. After the change, run the same helper with `--verify-existing` and report the verified absolute destination.
+
 ## What To Tell Your Agent
 
 ```text
@@ -40,9 +49,13 @@ Please use this runbook to walk me through organizing my agent workspace. Start 
 - protected areas are listed without exposing private contents.
 - memory rules are clear.
 - the agent knows to ask before guessing.
+- suspicious destination paths require confirmation.
+- completed filesystem changes are verified by absolute path.
 
 ## Ready-Made Files
 
 If you want a head start, copy the files from `starter-kit/` into your workspace.
+
+That folder now includes `path-resolution-preflight.py`. It uses only Python's standard library.
 
 Use `templates/` if you want to customize the wording before installing the files.

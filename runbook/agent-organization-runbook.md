@@ -17,7 +17,8 @@ This runbook helps your agent guide you through a better pattern:
 3. Write a curated placement map.
 4. Add rules that require the agent to use the map.
 5. Protect sensitive areas.
-6. Keep memory small and useful.
+6. Resolve and verify destinations before filesystem changes.
+7. Keep memory small and useful.
 
 ## Terms
 
@@ -109,6 +110,40 @@ The agent should answer:
 
 If the answer is weak, do not create the folder yet.
 
+## Step 6: Resolve The Exact Destination
+
+Before the agent creates, moves, copies, or consolidates durable files, run the starter helper with the requested path quoted:
+
+```bash
+python3 path-resolution-preflight.py '<requested-path>'
+```
+
+Quoting matters. It lets the helper see shorthand such as `~` and variables before the shell changes them.
+
+The helper reports:
+
+- the requested path
+- the expanded absolute path
+- whether the immediate parent exists
+- the nearest governing `AGENTS.md`
+- established roots found in `DIRECTORY_ATLAS.md`
+- likely equivalent destinations
+- duplicated path segments
+- unresolved variables
+- symlinks in the existing ancestor chain
+
+If it reports `SUSPICIOUS` or exits with status `2`, the agent must stop and ask the user to confirm the exact absolute destination.
+
+For example, when the current home folder already ends in `sam`, `~/sam/projects/site` adds a second `sam` segment. The repeated name is a warning that the user may have meant `~/projects/site`.
+
+After the approved change, verify what actually exists:
+
+```bash
+python3 path-resolution-preflight.py --verify-existing '<absolute-destination>'
+```
+
+The agent should report that verified absolute destination, not only the shorthand from chat.
+
 ## What Not To Do
 
 Do not create a giant atlas that lists every file.
@@ -118,6 +153,8 @@ Do not put secrets, private messages, browser profiles, credentials, or backups 
 Do not create new top-level folders just because the agent likes clean categories.
 
 Do not let the agent rewrite memory without explaining what changed and why.
+
+Do not continue after a suspicious preflight until the exact absolute destination is confirmed.
 
 Do not use the atlas as a replacement for common sense. It is a guide for placement decisions, not a command to move everything.
 
@@ -141,3 +178,4 @@ You can trust the setup more when:
 - memory is smaller and clearer
 - protected areas are named carefully
 - the agent reports what it changed and where
+- durable filesystem changes have a clear preflight and verified absolute destination

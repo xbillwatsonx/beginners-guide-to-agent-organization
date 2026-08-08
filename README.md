@@ -39,8 +39,10 @@ This runbook fixes that by creating three simple anchors:
 - `prompts/` - copy-paste prompts for getting your agent to walk you through the setup.
 - `templates/` - reusable templates for `DIRECTORY_ATLAS.md`, `AGENTS.md`, and memory rules.
 - `starter-kit/` - starter files you can copy into an agent workspace.
+- `starter-kit/path-resolution-preflight.py` - dependency-free, read-only path checker with safe self-tests.
 - `examples/` - small examples showing what a finished setup can look like.
 - `validate-agent-organization.py` - dependency-free checker for the package or a starter workspace.
+- `make-release-zip.py` - tracked-file-only release builder with a SHA-256 checksum.
 - `CHANGELOG.md` - package history.
 - `LICENSE` - MIT License.
 
@@ -66,6 +68,18 @@ Please use this runbook to walk me through organizing my agent workspace. Start 
 8. Open `prompts/04-review-memory-bloat.md`, copy the text inside the code block, and paste it into your agent chat.
 9. When the agent wants to create a new durable folder, open `prompts/05-before-you-create-a-folder.md`, copy the text inside the code block, and paste it into your agent chat.
 
+Before an agent creates, moves, copies, or consolidates durable files, have it inspect the requested destination while the original path is still quoted:
+
+```bash
+python3 starter-kit/path-resolution-preflight.py --atlas starter-kit/DIRECTORY_ATLAS.md '~/your-username/example-project'
+```
+
+A `SUSPICIOUS` result exits with status `2`. The agent should stop and ask you to confirm the exact absolute destination. After an approved filesystem change, verify the destination exists:
+
+```bash
+python3 starter-kit/path-resolution-preflight.py --atlas starter-kit/DIRECTORY_ATLAS.md --verify-existing '/absolute/destination'
+```
+
 If your agent can run commands, ask it to validate the package or starter workspace:
 
 ```bash
@@ -84,8 +98,10 @@ If you do have `just` installed, you can also run:
 
 ```bash
 just agent-verify
-just package
+just path-preflight-test
 ```
+
+Packaging is a separate release step. It is not needed for normal setup or validation.
 
 ## What Success Looks Like
 
@@ -96,6 +112,8 @@ You are done with the first setup when:
 - the agent knows where projects, research, reports, references, memory, logs, and templates belong
 - protected folders are named without exposing private contents
 - the agent searches existing homes before creating new folders
+- the agent checks the expanded absolute destination before durable filesystem changes
+- suspicious paths require confirmation, and completed changes are verified by absolute path
 - memory rules explain what should be remembered, filed, summarized, or ignored
 
 ## Important Safety Rule

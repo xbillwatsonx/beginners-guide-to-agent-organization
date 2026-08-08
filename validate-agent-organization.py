@@ -14,6 +14,7 @@ REQUIRED_FILES = [
     "CHANGELOG.md",
     "LICENSE",
     "justfile",
+    "make-release-zip.py",
     "runbook/agent-organization-runbook.md",
     "runbook/build-your-agent-organization-system.md",
     "runbook/quick-start-card.md",
@@ -28,6 +29,7 @@ REQUIRED_FILES = [
     "starter-kit/DIRECTORY_ATLAS.md",
     "starter-kit/AGENTS-placement-rules.md",
     "starter-kit/MEMORY-rules.md",
+    "starter-kit/path-resolution-preflight.py",
     "examples/simple-DIRECTORY_ATLAS-example.md",
     "examples/simple-AGENTS-placement-example.md",
     "examples/simple-MEMORY-rules-example.md",
@@ -121,6 +123,43 @@ def check_prompt_count(root: Path) -> list[str]:
     return []
 
 
+def check_path_preflight_contract(root: Path) -> list[str]:
+    errors: list[str] = []
+    helper = root / "starter-kit/path-resolution-preflight.py"
+    if helper.is_file():
+        text = helper.read_text(encoding="utf-8")
+        required_helper_terms = [
+            "expanded absolute path",
+            "nearest governing AGENTS.md",
+            "established equivalent roots",
+            "duplicated home/username segment",
+            "unresolved variable",
+            "symlinks in existing ancestor chain",
+            "--verify-existing",
+            "--self-test",
+            "return 2 if result.suspicious else 0",
+        ]
+        for term in required_helper_terms:
+            if term not in text:
+                errors.append(f"path preflight helper missing contract text: {term}")
+
+    instruction_files = [
+        root / "starter-kit/AGENTS-placement-rules.md",
+        root / "templates/AGENTS-placement-rules-template.md",
+        root / "runbook/agent-organization-runbook.md",
+    ]
+    for path in instruction_files:
+        if not path.is_file():
+            continue
+        text = path.read_text(encoding="utf-8")
+        for term in ("path-resolution-preflight.py", "SUSPICIOUS", "--verify-existing"):
+            if term not in text:
+                errors.append(
+                    f"{path.relative_to(root)} missing Path Resolution Preflight instruction: {term}"
+                )
+    return errors
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("path", nargs="?", default=".", help="package root")
@@ -132,6 +171,7 @@ def main() -> int:
     errors.extend(check_prompt_count(root))
     errors.extend(check_public_risks(root))
     errors.extend(check_links(root))
+    errors.extend(check_path_preflight_contract(root))
 
     if errors:
         print("Validation failed:")

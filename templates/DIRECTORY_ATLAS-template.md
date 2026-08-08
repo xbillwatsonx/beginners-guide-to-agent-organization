@@ -17,6 +17,7 @@ This is a curated placement map, not a full filesystem dump.
 3. Search existing folder names before creating a new durable folder.
 4. Prefer established homes.
 5. Ask before creating a new top-level durable folder if the right home is unclear.
+6. Run the Path Resolution Preflight before acting on a new, shorthand, variable-containing, or ambiguous destination.
 
 ## Major Folder Homes
 
@@ -52,3 +53,4 @@ Before creating a new durable folder, the agent must:
 4. propose the exact path
 5. ask for approval when the folder is top-level, sensitive, or unclear
 
+The agent must also compare the helper's expanded absolute path with the established homes in this atlas. A duplicated segment, unresolved variable, missing parent, unexpected symlink, or conflicting established root requires confirmation before acting.

@@ -1,6 +1,5 @@
-downloads/*.zip
+downloads/*.zip*
 __pycache__/
 *.pyc
 .DS_Store
 .justx/
-

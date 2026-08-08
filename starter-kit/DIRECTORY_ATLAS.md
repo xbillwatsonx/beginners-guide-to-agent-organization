@@ -29,3 +29,4 @@ Do not deeply summarize or expose credentials, backups, browser profiles, privat
 
 Search first. Explain the proposed location. Ask if the folder is durable, top-level, sensitive, or unclear.
 
+Before acting on a new, shorthand, variable-containing, or ambiguous destination, run `path-resolution-preflight.py` and compare its expanded absolute path with the established homes above.
