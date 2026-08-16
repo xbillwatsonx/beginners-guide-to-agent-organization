@@ -35,11 +35,13 @@ Durable folder
 : A folder that becomes a real home for ongoing work, not a temporary scratch space.
 
 Protected area
-: A folder that may exist, but should not be deeply summarized, copied, indexed, or exposed without a clear reason.
+: A folder that may exist, but should not be deeply summarized, copied, indexed, or exposed without a clear reason. The agent must ask before accessing any protected area.
 
 ## Step 1: Map The Current Workspace
 
 Start with `prompts/01-map-my-current-folders.md`.
+
+If the workspace feels overwhelming, do not try to map everything at once. Start with one area or two to three unclear folder decisions. For example: "Where should project notes go?" or "Is `projects-old` still active?" Resolve those first, then expand.
 
 The agent should inspect folder names, nearby instruction files, and obvious project structure. It should not read private contents deeply. The goal is to understand the shape of the workspace, not to vacuum up data.
 
@@ -88,11 +90,24 @@ The `AGENTS.md` rules should also say when to consult local instructions inside 
 
 Use `prompts/04-review-memory-bloat.md`.
 
-Memory is not a junk drawer. Long-term memory should hold durable preferences, durable rules, important active projects, and recurring lessons.
+Memory bloat means long-term memory is carrying details that should live in daily notes, project files, archives, or nowhere at all. Symptoms include: memory is nearly full, the agent repeats outdated information, new facts have no room, project knowledge is mixed with behavior reminders, and retrieval becomes unreliable because the agent has to search through clutter.
 
-Daily notes or project notes should hold details that matter, but do not need to live forever in the agent's short hot memory.
+Long-term memory should hold durable preferences, durable rules, important active projects, and recurring lessons. Daily notes or project notes should hold details that matter, but do not need to live forever in the agent's short hot memory.
 
 Do not ask the agent to dump private memory into a public file. Ask it to summarize categories and rules.
+
+### What to do with items found during review
+
+For each item the agent finds during a memory review, use this decision rubric:
+
+- **Keep**: short durable facts the agent needs almost every session (preferences, standing rules, active project pointers).
+- **Move**: longer reference material that belongs in a knowledge base, project docs, or daily notes. Move it to the correct destination and leave a short pointer in memory if needed.
+- **Archive**: material that may still be useful but should not be in memory or active project files. Move it to an archive folder. Keep it retrievable but out of the active path.
+- **Delete**: one-time noise, duplicates where the authoritative copy is clearly identified, or outdated status after work is complete. Delete only after review and only when you are confident the information exists elsewhere or no longer matters.
+
+If you are unsure whether something is safe to delete, archive it instead. When duplicates have different wording, compare them, preserve any unique information in the correct destination, and only then propose removing the redundant copy.
+
+Before any deletion: confirm a backup or version history exists. Archive uncertain material rather than permanently deleting it. Verify that moved information actually exists at its destination before removing the original.
 
 ## Step 5: Use The Folder-Creation Gate
 
@@ -134,6 +149,10 @@ The helper reports:
 
 If it reports `SUSPICIOUS` or exits with status `2`, the agent must stop and ask the user to confirm the exact absolute destination.
 
+If no `DIRECTORY_ATLAS.md` exists yet, the preflight helper prints `directory atlas: none found`. A missing atlas is not a clearance signal. The agent should stop and build or confirm the atlas before creating durable folders, not treat the absence as safe to proceed.
+
+If the proposed path is outside every established atlas root, the agent should warn that the destination is outside the known homes and suggest the atlas-listed home instead. The preflight helper may report `status: CLEAR` in this case, but the agent must still apply the placement rule: check the atlas, search existing homes, and ask if the destination is unclear.
+
 For example, when the current home folder already ends in `sam`, `~/sam/projects/site` adds a second `sam` segment. The repeated name is a warning that the user may have meant `~/projects/site`.
 
 After the approved change, verify what actually exists:
@@ -148,7 +167,15 @@ The agent should report that verified absolute destination, not only the shortha
 
 Do not create a giant atlas that lists every file.
 
-Do not put secrets, private messages, browser profiles, credentials, or backups into examples.
+Do not put secrets, private messages, browser profiles, credentials, customer data, financial records, backups, or runtime folders into examples.
+
+Protected areas include: credentials and API keys, customer or client data, financial records and account numbers, browser profiles, password stores, SSH keys, medical records, legal documents, and private correspondence.
+
+The agent must ask before accessing any protected area. It should not open, read, summarize, copy, or index protected contents without explicit user approval.
+
+When a protected area sits inside an otherwise approved folder, the protection inherits to all subfolders and files inside it. The agent must treat the entire subtree as protected, not just the top-level folder name. For example, if `~/projects/client-work/` is protected and contains a `notes/` subfolder, `notes/` is also protected.
+
+When listing protected areas in the atlas, include only the folder name, its purpose (e.g., "contains credentials, do not inspect"), and its boundary. Do not include filenames, file counts, content summaries, or any actual data from inside the protected area.
 
 Do not create new top-level folders just because the agent likes clean categories.
 
